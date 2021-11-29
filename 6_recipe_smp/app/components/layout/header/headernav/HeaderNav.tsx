@@ -19,7 +19,7 @@ const HeaderNav = () => {
         setErr("");
   }
 
-  console.log(LoginedUserData, "LoginUserInfd");
+  // console.log(LoginedUserData, "LoginUserInfd");
 
   const showLoginIcon=()=>{
     if(!LoginedUserData){

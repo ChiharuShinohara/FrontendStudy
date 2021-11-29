@@ -1,9 +1,9 @@
 import style from '../modal/loginmodal.module.scss'
 import { AxiosClient } from '../../modules/request';
 import {useState} from "react"
-import { useRouter } from 'next/router';
 import {LoginedUserData} from '../../＠types/basicdata'
-
+import { parseCookies, setCookie } from 'nookies';
+import { NextPageContext } from 'next';
 
 
 type Props={
@@ -22,7 +22,6 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,showLoginModalClick, setLog
       const value= e.target.value
       const name= e.target.name
      setInfo({...info, [name]: value})
-     console.log(info)
   }
   const Post= async ()=>{
       try{
@@ -33,6 +32,13 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,showLoginModalClick, setLog
         if(loginUserData){ 
           setLoginedUserData(loginUserData);
           showLoginModalClick()
+          console.log(loginUserData.p_token,"e")
+          const options= {
+            //30日間保存 
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/",
+          }
+          setCookie(null, 'cookie', loginUserData.p_token, options);
         }else{
             setErr(res.data.errmessage); 
             }
