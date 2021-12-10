@@ -1,23 +1,22 @@
 import id from 'date-fns/esm/locale/id/index.js'
 import {LoginedUserData} from '../../＠types/basicdata'
 import style from '../modal/menumodal.module.scss'
-import {useState} from 'react';
 
 type Props ={
     showMenuModal: boolean;
-    LoginedUserData: LoginedUserData;
     showMenuModalClick: ()=>void;
     showLoginModalClick: ()=>void;
+    userInfo: LoginedUserData
 }
 
-const MenuModal: React.FC<Props>=({ showMenuModal, LoginedUserData, showMenuModalClick, showLoginModalClick })=>{
+const MenuModal: React.FC<Props>=({ showMenuModal, userInfo, showMenuModalClick, showLoginModalClick })=>{
 
     const UserInfo=()=>{
-        if(LoginedUserData){
+        if(userInfo){
             return(
                 <div className={style.user}>
-                <img src={LoginedUserData.icon} width={40} height={40}></img>
-                <p>{LoginedUserData.user_name}</p>
+                <img src={userInfo.icon} width={40} height={40}></img>
+                <p>{userInfo.user_name}</p>
             </div>
             )
         }else{

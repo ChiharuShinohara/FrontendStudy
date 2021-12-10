@@ -1,23 +1,24 @@
 import style from '../modal/loginmodal.module.scss'
 import { AxiosClient } from '../../modules/request';
 import {useState} from "react"
-import { useRouter } from 'next/router';
 import {LoginedUserData} from '../../＠types/basicdata'
-
 
 
 type Props={
     showLoginModal: boolean;
     showLoginModalClick: ()=>void;
-    setLoginedUserData: React.Dispatch<React.SetStateAction<LoginedUserData>>;
+    setUserInfo: React.Dispatch<React.SetStateAction<LoginedUserData>>;
     err: string;
     setErr: React.Dispatch<React.SetStateAction<string>>;
+    
 }
 
 
-const LoginModal: React.FC<Props>= ({showLoginModal ,showLoginModalClick, setLoginedUserData, err ,setErr}) =>{
+const LoginModal: React.FC<Props>= ({showLoginModal ,setUserInfo, showLoginModalClick, err ,setErr}) =>{
     const [info, setInfo]=useState({email: "", password:""})
  
+  
+
   const ChangeInfo=(e)=>{
       const value= e.target.value
       const name= e.target.name
@@ -31,7 +32,8 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,showLoginModalClick, setLog
         const loginUserData= res.data.data[0]
 
         if(loginUserData){ 
-          setLoginedUserData(loginUserData);
+          setUserInfo(loginUserData);
+          
           showLoginModalClick()
         }else{
             setErr(res.data.errmessage); 
@@ -39,7 +41,6 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,showLoginModalClick, setLog
           }
         
       catch (err) {
-        console.log(err,"err")
         const errorCode = typeof err.response === "undefined"?  500: err.response.status;
   
       }

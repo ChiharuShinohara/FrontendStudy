@@ -1,10 +1,14 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import Error from 'next/error';
 import Layout from '../../components/layout/Layout'
 import Conteiner from '../../components/main/conteiner';
 import { AxiosClient } from '../../modules/request';
 import  { RecipeApiResponse } from "../../＠types/basicdata"
-import LoginModal from '../../components/modal/LoginModal'
+import {useContext} from "react";
+import {UserContext} from "../../components/userprovider/AuthUser";
+import { tokenInspection } from '../../modules/tokenInspection';
+import { useRouter } from "next/router";
+import {useState } from 'react';
 
 
 
@@ -14,15 +18,50 @@ interface Props {
 
 }
 const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
+    const  {userInfo, setUserInfo } = useContext(UserContext);
+    const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
+    
+    useEffect(()=>{
+      if(userInfo==undefined){
+      tokenInspection().then(
+        value=>setUserInfo(value))
+      }
+    },[userInfo])
+
+    useEffect(()=>{
+      if(userInfo){
+           checkfavo();  
+        }
+    },[userInfo])
+
+    const checkfavo= async ()=>{
+       
+      try{
+       const axios = AxiosClient();
+       const router =useRouter();
+       const recipeid= router.query.recipeid;
+       const userid=userInfo.id
+       const res = await axios.get('recipe/checkfavo',{params:{ userid: userid , recipeid: recipeid}}); 
+       if(res.data){
+       setFavoriteFlag(false)
+       }
+      
+      }catch(err){
+        return <Error statusCode={errorCode} />
+      }
+    }
+   
+
 
     if (errorCode) {
         return <Error statusCode={errorCode} />;
       } 
+  
     
     return(
      <div> 
         <Layout>
-        <Conteiner recipeDatas={recipeDatas} ></Conteiner>
+        <Conteiner recipeDatas={recipeDatas} favoriteFlag={favoriteFlag} setFavoriteFlag={setFavoriteFlag}></Conteiner>
         </Layout> 
    </div>
         
@@ -31,13 +70,14 @@ const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
     )
 }
 
+
 export const getServerSideProps = async (ctx: any) => {
-  console.log(ctx,"ctxxxxxxxxxxxxxxxx")
+ 
   try {
+     
     const id = ctx.params.recipeid;
     const axios = AxiosClient();
     const res = await axios.get(`recipe/${id}`);
-    // console.log(res.data.recipeDatas,"serversideprops")
     if(res.data.recipeDatas.length==0){
       return { props: { errorCode: 500 } };
     }
