@@ -8,16 +8,17 @@ import {RecipeApiResponse} from "../../＠types/basicdata";
 
 interface Props {
   recipeDatas: RecipeApiResponse;
+  favoriteFlag: boolean;
+  setFavoriteFlag:React.Dispatch<React.SetStateAction<boolean>>;
 
 }
 
-    const Conteiner:React.FC<Props>=({recipeDatas}) => {
+    const Conteiner:React.FC<Props>=({ recipeDatas, favoriteFlag, setFavoriteFlag }) => {
     
     const [recipeData, ingredientData, processData] = [recipeDatas.recipeData, recipeDatas.ingredientData, recipeDatas.processData];
     const favoriteCount=Number(recipeData.favorite_count);
 
     const[count, setCount]=useState(favoriteCount);
-    const[favoriteFlag, setFavoriteFlag]=useState(true);
    
     const hanfleClickCount=(e)=>{
         setFavoriteFlag(!favoriteFlag); 
@@ -38,7 +39,7 @@ interface Props {
 
     return(
         <div className= {style.wrapper}>
-            <div className={style.title} >
+            <h1 className={style.title} >
                     <div className={style.recipename}>
                     <p>{recipeData.recipe_name}</p>
                     </div>
@@ -47,7 +48,7 @@ interface Props {
                         <p>{recipeData.cooking_time}分</p>
                     </div>
 
-                </div>
+                </h1>
             <img src={`${recipeData.img}`}/>
             <RecipeDetail recipeData={recipeData} />
             <Ingredients ingredientData={ingredientData}/>
