@@ -5,7 +5,7 @@ import Conteiner from '../../components/main/conteiner';
 import { AxiosClient } from '../../modules/request';
 import  { RecipeApiResponse } from "../../＠types/basicdata"
 import {useContext} from "react";
-import {UserContext} from "../../components/userprovider/AuthUser";
+import {AuthUserContext, AuthDispatchContext} from "../../components/userprovider/AuthUser";
 import { tokenInspection } from '../../modules/tokenInspection';
 import { useRouter } from "next/router";
 import {useState } from 'react';
@@ -18,21 +18,22 @@ interface Props {
 
 }
 const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
-    const  {userInfo, setUserInfo } = useContext(UserContext);
-    const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
+  const authUser = useContext(AuthUserContext)?.userInfo
+  const setUserInfo= useContext(AuthDispatchContext)
+  const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
     
     useEffect(()=>{
-      if(userInfo==undefined){
+      if(authUser==undefined){
       tokenInspection().then(
         value=>setUserInfo(value))
       }
-    },[userInfo])
+    },[authUser])
 
     useEffect(()=>{
-      if(userInfo){
+      if(authUser){
            checkfavo();  
         }
-    },[userInfo])
+    },[authUser])
 
     const checkfavo= async ()=>{
        
@@ -40,7 +41,7 @@ const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
        const axios = AxiosClient();
        const router =useRouter();
        const recipeid= router.query.recipeid;
-       const userid=userInfo.id
+       const userid = authUser.id
        const res = await axios.get('recipe/checkfavo',{params:{ userid: userid , recipeid: recipeid}}); 
        if(res.data){
        setFavoriteFlag(false)

@@ -2,7 +2,7 @@ import { parseCookies } from 'nookies';
 import { NextPageContext } from 'next';
 import { AxiosClient } from './request';
 import {useContext} from "react";
-import {UserContext} from "../components/userprovider/AuthUser";
+import {AuthUserContext} from "../components/userprovider/AuthUser";
 //import {LoginedUserData} from '../＠types/basicdata'
 
 //type Props= LoginedUserData|null

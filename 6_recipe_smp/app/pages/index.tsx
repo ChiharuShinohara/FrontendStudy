@@ -3,7 +3,7 @@ import HomeContainer from '../components/main/home/HomeContainer';
 import { AxiosClient } from '../modules/request';
 import { RecipeData } from '../＠types/basicdata';
 import {useContext, useEffect} from "react";
-import {UserContext} from "../components/userprovider/AuthUser";
+import {AuthUserContext, AuthDispatchContext} from "../components/userprovider/AuthUser";
 import { tokenInspection } from '../modules/tokenInspection';
 
 
@@ -13,15 +13,19 @@ type Props={
 
 const Home: React.FC<Props> = ({recipeData}) => {
   console.log(recipeData, "recipeData")
-  const  {userInfo, setUserInfo } = useContext(UserContext);
-    console.log(userInfo,"useinfo");
+  const authUser = useContext(AuthUserContext).userInfo
+  const setUserInfo = useContext(AuthDispatchContext)
+
+    console.log(authUser,"useinfo");
 
     useEffect(()=>{
-      if(userInfo==null){
+      if(authUser==undefined){
       tokenInspection().then(
         value=>setUserInfo(value))
       }
-    },[userInfo])
+    },[authUser])
+
+
   return (
     <div>
       <Layout>
@@ -38,7 +42,7 @@ export const getServerSideProps = async (ctx: any) => {
     const axios = AxiosClient();
     const res = await axios.get('recipes');
 
-    return { props: { recipeData: res.data.recipeData　} };
+    return { props: { recipeData: res.data.recipeData} };
 
     //このpropsは上のPageコンポーネントに渡される
   } catch (err) {

@@ -6,23 +6,23 @@ type Props ={
     showMenuModal: boolean;
     showMenuModalClick: ()=>void;
     showLoginModalClick: ()=>void;
-    userInfo: LoginedUserData
+    authUser: LoginedUserData
 }
 
-const MenuModal: React.FC<Props>=({ showMenuModal, userInfo, showMenuModalClick, showLoginModalClick })=>{
+const MenuModal: React.FC<Props>=({ showMenuModal, authUser, showMenuModalClick, showLoginModalClick })=>{
 
     const UserInfo=()=>{
-        if(userInfo){
+        if(authUser){
             return(
                 <div className={style.user}>
-                <img src={userInfo.icon} width={40} height={40}></img>
-                <p>{userInfo.user_name}</p>
+                <img src={authUser.icon} width={40} height={40}></img>
+                <p>{authUser.user_name}</p>
             </div>
             )
         }else{
             return(
             <div className={style.login}>
-                <button onClick={showLoginModalClick}>  ログイン　</button>
+                <button onClick={showLoginModalClick}>  ログイン </button>
             </div>
             )
             

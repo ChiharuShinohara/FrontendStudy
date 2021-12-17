@@ -6,7 +6,7 @@ import MenuModal from '../../../modal/MenuModal'
 import  { useState }  from 'react';
 import { LoginedUserData } from '../../../../＠types/basicdata'
 import {useContext} from "react";
-import {UserContext} from "../../../userprovider/AuthUser";
+import {AuthUserContext, AuthDispatchContext} from "../../../userprovider/AuthUser";
 
 
 
@@ -14,7 +14,8 @@ const HeaderNav = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   // const [LoginedUserData, setLoginedUserData] = useState<LoginedUserData |null>(null)
   const [showMenuModal, setShowMenuModal] = useState(false);
-  const  {userInfo, setUserInfo } = useContext(UserContext);
+  const authUser = useContext(AuthUserContext)?.userInfo
+  const setUserInfo= useContext(AuthDispatchContext);
   const [err, setErr]=useState("")
 
   const showLoginModalClick= ()=>{
@@ -22,10 +23,9 @@ const HeaderNav = () => {
         setErr("");
   }
 
-  console.log(LoginedUserData, "LoginUserInfd");
 
   const showLoginIcon=()=>{
-    if(!userInfo){
+    if(!authUser){
       return( 
         <a onClick={showLoginModalClick}>
           <i className={'commonIcon iconSmp_login'}></i>
@@ -63,7 +63,7 @@ const HeaderNav = () => {
               <i className={'commonIcon iconSmp_menu'} onClick={showMenuModalClick}></i>
             </a>
           </li>
-          <MenuModal userInfo={userInfo} showMenuModal={showMenuModal}  showMenuModalClick={showMenuModalClick} showLoginModalClick={showLoginModalClick}></MenuModal>
+          <MenuModal authUser={authUser} showMenuModal={showMenuModal}  showMenuModalClick={showMenuModalClick} showLoginModalClick={showLoginModalClick}></MenuModal>
       
       </ul>
     

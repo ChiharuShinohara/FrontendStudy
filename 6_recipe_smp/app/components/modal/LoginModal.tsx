@@ -1,13 +1,13 @@
 import style from '../modal/loginmodal.module.scss'
 import { AxiosClient } from '../../modules/request';
 import {useState} from "react"
-import {LoginedUserData} from '../../＠types/basicdata'
+import {AuthState} from "../userprovider/AuthUser";
 
 
 type Props={
     showLoginModal: boolean;
     showLoginModalClick: ()=>void;
-    setUserInfo: React.Dispatch<React.SetStateAction<LoginedUserData>>;
+    setUserInfo: React.Dispatch<React.SetStateAction<AuthState>>
     err: string;
     setErr: React.Dispatch<React.SetStateAction<string>>;
     
@@ -69,7 +69,7 @@ return(
                 <p className={style.err}>{err}</p>
                 <button  onClick={Post} className={style.loginButton}>ログイン</button>
         
-                <button　onClick={showLoginModalClick}>✖️ 閉じる</button>
+                <button onClick={showLoginModalClick}> ✖ 閉じる</button>
             </div>
     </div>
   
