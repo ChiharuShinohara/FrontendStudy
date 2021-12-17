@@ -13,10 +13,9 @@ type Props={
 
 const Home: React.FC<Props> = ({recipeData}) => {
   console.log(recipeData, "recipeData")
-  const authUser = useContext(AuthUserContext).userInfo
+  const authUser = useContext(AuthUserContext)?.userInfo
   const setUserInfo = useContext(AuthDispatchContext)
 
-    console.log(authUser,"useinfo");
 
     useEffect(()=>{
       if(authUser==undefined){

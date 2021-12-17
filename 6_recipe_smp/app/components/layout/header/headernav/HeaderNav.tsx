@@ -14,7 +14,7 @@ const HeaderNav = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   // const [LoginedUserData, setLoginedUserData] = useState<LoginedUserData |null>(null)
   const [showMenuModal, setShowMenuModal] = useState(false);
-  const authUser = useContext(AuthUserContext)?.userInfo
+  const authUser = useContext(AuthUserContext)
   const setUserInfo= useContext(AuthDispatchContext);
   const [err, setErr]=useState("")
 
@@ -32,6 +32,7 @@ const HeaderNav = () => {
         </a>
       )
     }
+    console.log("loginbutton")
   }
 
   const showMenuModalClick=()=>{

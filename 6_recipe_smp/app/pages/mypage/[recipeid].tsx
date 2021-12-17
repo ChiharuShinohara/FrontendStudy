@@ -19,13 +19,15 @@ interface Props {
 }
 const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
   const authUser = useContext(AuthUserContext)?.userInfo
+  console.log(authUser, "authUserrrr")
+
   const setUserInfo= useContext(AuthDispatchContext)
   const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
-    
     useEffect(()=>{
-      if(authUser==undefined){
+      if(authUser == undefined){
       tokenInspection().then(
-        value=>setUserInfo(value))
+        value=>setUserInfo({userInfo: value}) 
+      )
       }
     },[authUser])
 

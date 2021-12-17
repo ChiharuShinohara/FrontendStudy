@@ -1,21 +1,20 @@
 import { parseCookies } from 'nookies';
 import { NextPageContext } from 'next';
 import { AxiosClient } from './request';
-import {useContext} from "react";
-import {AuthUserContext} from "../components/userprovider/AuthUser";
-//import {LoginedUserData} from '../＠types/basicdata'
-
-//type Props= LoginedUserData|null
+import Error from 'next/error';
 
 
 export const tokenInspection= async(ctx? :NextPageContext) => {
         const cookie= parseCookies(ctx);
-        if(cookie.cookie==undefined){
+        console.log(cookie, "cookie")
+        if(typeof(cookie.cookie)=="undefined"){
             return null 
             }
-        const axios = AxiosClient();
-        const res = await axios.post('token', {params: cookie});
-        const userinfo=res.data.data[0]
-        
-        return userinfo;
+        try{ const axios = AxiosClient();
+            const res = await axios.post('token', {params: cookie});
+            const userinfo=res.data.data[0]
+            return userinfo;
+        }catch(err){
+           console.log(err)}
+       
 }

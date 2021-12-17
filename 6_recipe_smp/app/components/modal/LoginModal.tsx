@@ -2,7 +2,7 @@ import style from '../modal/loginmodal.module.scss'
 import { AxiosClient } from '../../modules/request';
 import {useState} from "react"
 import {AuthState} from "../userprovider/AuthUser";
-
+import {  setCookie } from 'nookies';
 
 type Props={
     showLoginModal: boolean;
@@ -32,13 +32,20 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,setUserInfo, showLoginModal
         const loginUserData= res.data.data[0]
 
         if(loginUserData){ 
-          setUserInfo(loginUserData);
-          
+          setUserInfo({userInfo: loginUserData});
           showLoginModalClick()
+          const options= {
+            //30日間保存 
+            maxAge: 30 * 24 * 60 * 60,
+            path: "/",
+          }
+          setCookie(null, 'cookie', loginUserData.p_token, options);
+          
+
         }else{
             setErr(res.data.errmessage); 
-            }
           }
+        }
         
       catch (err) {
         const errorCode = typeof err.response === "undefined"?  500: err.response.status;

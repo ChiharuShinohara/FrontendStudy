@@ -25,7 +25,6 @@ const initialValue:AuthState = {
 
 const AuthUser:React.FC=(props)=>{
      const [userInfo, setUserInfo]= useState<AuthState>(initialValue);
-       
 return(
     <AuthDispatchContext.Provider value={setUserInfo}>
         <AuthUserContext.Provider value={userInfo}>
