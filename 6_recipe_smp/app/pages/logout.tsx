@@ -1,19 +1,16 @@
 import {useContext} from "react";
-import { AuthDispatchContext} from "../components/userprovider/AuthUser";
- import { parseCookies, destroyCookie } from 'nookies';
+import { AuthDispatchContext, AuthUserContext} from "../components/userprovider/AuthUser";
+ import { destroyCookie } from 'nookies';
 import {useRouter} from "next/router";
 import { useEffect } from "react";
 
 const Logout=(ctx)=>{
-    console.log(ctx, "ctx.cookie")
+    const authUser= useContext(AuthUserContext)
     const setUserInfo= useContext(AuthDispatchContext)
-
-    setUserInfo(null);
+    setUserInfo({userInfo: null});
     destroyCookie(null,'cookie', {path: "/"});
-    const cookie= parseCookies(ctx);
-    console.log(cookie, "getcookie")
     const router=useRouter()
-    useEffect( ()=>{router.push("/"); })
+    useEffect(()=>{router.push("/");})
 
     return null
 }

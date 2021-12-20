@@ -18,24 +18,22 @@ interface Props {
 
 }
 const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
-  const authUser = useContext(AuthUserContext)?.userInfo
-  console.log(authUser, "authUserrrr")
-
+  const authUser = useContext(AuthUserContext)
   const setUserInfo= useContext(AuthDispatchContext)
   const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
     useEffect(()=>{
-      if(authUser == undefined){
+      if(authUser.userInfo == undefined){
       tokenInspection().then(
         value=>setUserInfo({userInfo: value}) 
       )
       }
-    },[authUser])
+    },[])
 
     useEffect(()=>{
-      if(authUser){
+      if(authUser.userInfo){
            checkfavo();  
         }
-    },[authUser])
+    },[authUser.userInfo])
 
     const checkfavo= async ()=>{
        
@@ -43,7 +41,7 @@ const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
        const axios = AxiosClient();
        const router =useRouter();
        const recipeid= router.query.recipeid;
-       const userid = authUser.id
+       const userid = authUser.userInfo.id
        const res = await axios.get('recipe/checkfavo',{params:{ userid: userid , recipeid: recipeid}}); 
        if(res.data){
        setFavoriteFlag(false)

@@ -5,6 +5,8 @@ import Ingredients from './ingredients/Ingredients'
 import Process from './process/Process'
 import React, {useState } from 'react';
 import {RecipeApiResponse} from "../../＠types/basicdata";
+// import Link from 'next/link';
+
 
 interface Props {
   recipeDatas: RecipeApiResponse;
@@ -39,6 +41,9 @@ interface Props {
 
     return(
         <div className= {style.wrapper}>
+            {/* <Link href="/mypage/4">
+             <a>recipe4</a>
+           </Link> */}
             <div className={style.title} >
                     <div className={style.recipename}>
                     <h1>{recipeData.recipe_name}</h1>

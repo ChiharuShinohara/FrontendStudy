@@ -2,11 +2,12 @@ import { parseCookies } from 'nookies';
 import { NextPageContext } from 'next';
 import { AxiosClient } from './request';
 import Error from 'next/error';
+import { LoginedUserData } from '../＠types/basicdata';
 
+type TokenInspection= ()=>Promise<LoginedUserData | null>
 
-export const tokenInspection= async(ctx? :NextPageContext) => {
+export const tokenInspection:TokenInspection = async(ctx?:NextPageContext ) => {
         const cookie= parseCookies(ctx);
-        console.log(cookie, "cookie")
         if(typeof(cookie.cookie)=="undefined"){
             return null 
             }

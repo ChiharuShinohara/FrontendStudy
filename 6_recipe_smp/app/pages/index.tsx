@@ -12,17 +12,15 @@ type Props={
 }
 
 const Home: React.FC<Props> = ({recipeData}) => {
-  console.log(recipeData, "recipeData")
-  const authUser = useContext(AuthUserContext)?.userInfo
-  const setUserInfo = useContext(AuthDispatchContext)
-
-
+  const authUser = useContext(AuthUserContext)
+  const setUserInfo= useContext(AuthDispatchContext)
     useEffect(()=>{
-      if(authUser==undefined){
+      if(authUser.userInfo == undefined){
       tokenInspection().then(
-        value=>setUserInfo(value))
+        value=>{setUserInfo({userInfo: value})}
+        )
       }
-    },[authUser])
+    },[])
 
 
   return (

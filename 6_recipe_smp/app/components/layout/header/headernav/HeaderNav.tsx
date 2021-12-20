@@ -4,7 +4,6 @@ import React from 'react';
 import LoginModal from '../../../modal/LoginModal'
 import MenuModal from '../../../modal/MenuModal'
 import  { useState }  from 'react';
-import { LoginedUserData } from '../../../../＠types/basicdata'
 import {useContext} from "react";
 import {AuthUserContext, AuthDispatchContext} from "../../../userprovider/AuthUser";
 
@@ -25,14 +24,13 @@ const HeaderNav = () => {
 
 
   const showLoginIcon=()=>{
-    if(!authUser){
+    if(authUser.userInfo == null){
       return( 
         <a onClick={showLoginModalClick}>
           <i className={'commonIcon iconSmp_login'}></i>
         </a>
       )
     }
-    console.log("loginbutton")
   }
 
   const showMenuModalClick=()=>{
