@@ -1,5 +1,9 @@
 import React,{ createContext, useState } from "react";
-import {LoginedUserData} from '../../＠types/basicdata'
+import {LoginedUserData} from '../../＠types/basicdata';
+import { tokenInspection } from '../../modules/tokenInspection';
+import {useEffect} from "react";
+
+
 
 interface AuthStateContext{
     userInfo: LoginedUserData | null | undefined;
@@ -25,6 +29,14 @@ const initialValue:AuthState = {
 
 const AuthUser:React.FC=(props)=>{
      const [userInfo, setUserInfo]= useState<AuthState>(initialValue);
+     
+     useEffect(()=>{
+        if(typeof(userInfo.userInfo) == "undefined"){
+        tokenInspection().then(
+          value=>setUserInfo({userInfo: value}) 
+        )
+        }
+      },[])
 return(
     <AuthDispatchContext.Provider value={setUserInfo}>
         <AuthUserContext.Provider value={userInfo}>

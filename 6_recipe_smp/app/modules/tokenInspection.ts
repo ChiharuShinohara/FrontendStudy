@@ -1,7 +1,6 @@
 import { parseCookies } from 'nookies';
 import { NextPageContext } from 'next';
 import { AxiosClient } from './request';
-import Error from 'next/error';
 import { LoginedUserData } from '../＠types/basicdata';
 
 type TokenInspection= ()=>Promise<LoginedUserData | null>
@@ -12,6 +11,7 @@ export const tokenInspection:TokenInspection = async(ctx?:NextPageContext ) => {
             return null 
             }
         try{ const axios = AxiosClient();
+            console.log(cookie)
             const res = await axios.post('token', {params: cookie});
             const userinfo=res.data.data[0]
             return userinfo;
