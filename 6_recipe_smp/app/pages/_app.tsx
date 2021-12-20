@@ -1,6 +1,5 @@
 import { AppProps } from 'next/app';
-import Head from "next/head";
-import '../styles/scss/foundation/reset.scss';
+import '../styles/reset.scss';
 import '../assets/fonts/style.css'
 import AuthUser from '../components/userprovider/AuthUser'
 

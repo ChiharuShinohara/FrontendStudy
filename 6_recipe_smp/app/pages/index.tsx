@@ -15,7 +15,7 @@ const Home: React.FC<Props> = ({recipeData}) => {
   const authUser = useContext(AuthUserContext)
   const setUserInfo= useContext(AuthDispatchContext)
     useEffect(()=>{
-      if(authUser.userInfo == undefined){
+      if(typeof(authUser.userInfo) == "undefined"){
       tokenInspection().then(
         value=>{setUserInfo({userInfo: value})}
         )

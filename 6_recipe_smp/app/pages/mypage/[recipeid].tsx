@@ -22,7 +22,7 @@ const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
   const setUserInfo= useContext(AuthDispatchContext)
   const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
     useEffect(()=>{
-      if(authUser.userInfo == undefined){
+      if(typeof(authUser.userInfo) == "undefined"){
       tokenInspection().then(
         value=>setUserInfo({userInfo: value}) 
       )
