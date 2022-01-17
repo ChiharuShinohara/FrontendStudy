@@ -1,10 +1,11 @@
 import style from './conteiner.module.scss'
-import Image from 'next/image'
 import RecipeDetail from './recipedetail/RecipeDetail'
 import Ingredients from './ingredients/Ingredients'
 import Process from './process/Process'
-import React, {useState } from 'react';
+import React from 'react';
 import {RecipeApiResponse} from "../../＠types/basicdata";
+import Favobutton from '../favorite/Favobutton';
+
 // import Link from 'next/link';
 
 
@@ -18,29 +19,10 @@ interface Props {
     const Conteiner:React.FC<Props>=({ recipeDatas, favoriteFlag, setFavoriteFlag }) => {
     
     const [recipeData, ingredientData, processData] = [recipeDatas.recipeData, recipeDatas.ingredientData, recipeDatas.processData];
-    const favoriteCount=Number(recipeData.favorite_count);
-
-    const[count, setCount]=useState(favoriteCount);
    
-    const hanfleClickCount=(e)=>{
-        setFavoriteFlag(!favoriteFlag); 
-        e.target.classList.toggle("iconHeart"); 
-        e.target.classList.toggle("iconHeart-line"); 
-        if(favoriteFlag){
-        setCount(count+1);
-        }
-        else{
-       
-        setCount(favoriteCount);
-        } 
-        
-    }
-      
-    
-
-
     return(
         <div className= {style.wrapper}>
+
             {/* <Link href="/mypage/4">
              <a>recipe4</a>
            </Link> */}
@@ -58,13 +40,8 @@ interface Props {
             <RecipeDetail recipeData={recipeData} />
             <Ingredients ingredientData={ingredientData}/>
             <Process processData={processData}/>
-            <div className={style.buttons}>
-               
-                <a  onClick={(e)=>{hanfleClickCount(e)}}>
-                    <span>お気に入りに入れる</span>
-                    <span className={'commonIcon iconHeart-line'} >{count}</span>
-                    </a>
-            </div>
+            <Favobutton recipeData={recipeData} favoriteFlag={favoriteFlag} setFavoriteFlag={setFavoriteFlag}></Favobutton>
+                
         </div>
     )
 }

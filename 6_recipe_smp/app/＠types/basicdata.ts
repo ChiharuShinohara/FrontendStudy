@@ -18,7 +18,7 @@ export type RecipeData = {
     user_introduction: string;
     icon: string;
     category_name: string;
-    favorite_count: string | null;
+    favorite_count: number;
  };
 
  export type IngredientData={

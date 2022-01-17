@@ -1,29 +1,28 @@
 import style from '../modal/loginmodal.module.scss'
 import { AxiosClient } from '../../modules/request';
-import {useState} from "react"
+import {useState, useContext} from "react"
 import {AuthState} from "../userprovider/AuthUser";
 import {  setCookie } from 'nookies';
+import {AuthDispatchContext} from "../userprovider/AuthUser";
 
 type Props={
     showLoginModal: boolean;
     showLoginModalClick: ()=>void;
-    setUserInfo: React.Dispatch<React.SetStateAction<AuthState>>
     err: string;
     setErr: React.Dispatch<React.SetStateAction<string>>;
     
 }
 
 
-const LoginModal: React.FC<Props>= ({showLoginModal ,setUserInfo, showLoginModalClick, err ,setErr}) =>{
+const LoginModal: React.FC<Props>= ({showLoginModal, showLoginModalClick, err ,setErr}) =>{
     const [info, setInfo]=useState({email: "", password:""})
- 
+    const setUserInfo= useContext(AuthDispatchContext);
   
 
   const ChangeInfo=(e)=>{
       const value= e.target.value
       const name= e.target.name
      setInfo({...info, [name]: value})
-     console.log(info)
   }
   const Post= async ()=>{
       try{
@@ -33,6 +32,7 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,setUserInfo, showLoginModal
 
         if(loginUserData){ 
           setUserInfo({userInfo: loginUserData});
+          //入力情報が一致していたらモーダルを閉じる
           showLoginModalClick()
           const options= {
             //30日間保存 
@@ -43,13 +43,14 @@ const LoginModal: React.FC<Props>= ({showLoginModal ,setUserInfo, showLoginModal
           
 
         }else{
-            setErr(res.data.errmessage); 
+          //errmessageは ”ユーザー情報に誤りがあります"
+            setErr(res.data.errmessage);
           }
         }
         
       catch (err) {
         const errorCode = typeof err.response === "undefined"?  500: err.response.status;
-  
+        console.log(errorCode);
       }
     }
 

@@ -28,7 +28,7 @@ const initialValue:AuthState = {
 
 const AuthUser:React.FC=(props)=>{
      const [userInfo, setUserInfo]= useState<AuthState>(initialValue);
-     
+
      useEffect(()=>{
         if(typeof(userInfo.userInfo) == "undefined"){
         tokenInspection().then(

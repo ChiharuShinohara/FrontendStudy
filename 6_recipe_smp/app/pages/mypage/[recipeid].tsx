@@ -8,7 +8,7 @@ import {useContext} from "react";
 import {AuthUserContext} from "../../components/userprovider/AuthUser";
 import { useRouter } from "next/router";
 import {useState } from 'react';
-
+import favoInspection from '../../modules/favoInspection'
 
 
 interface Props {
@@ -16,34 +16,30 @@ interface Props {
   errorCode:number;
 
 }
-const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
-  const authUser = useContext(AuthUserContext)
-  const [favoriteFlag, setFavoriteFlag ]= useState<boolean>(false);
-    
 
-    useEffect(()=>{
+type favoProps = {
+  recipeid: number;
+  isFlag: boolean;
+}[] | null 
+
+
+const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
+  const authUser = useContext(AuthUserContext);
+  const router =useRouter();
+  const [favoriteFlag, setFavoriteFlag]= useState<favoProps>(null); 
+  
+  
+    useEffect(()=>{ 
       if(authUser.userInfo){
-           checkfavo();  
+        const recipeid= router.query.recipeid;
+        const userid = authUser.userInfo.id;
+        favoInspection(userid, recipeid).then(datas=>{
+          setFavoriteFlag(datas)
+        }).catch((err)=>{
+          console.log(err);
+        })
         }
     },[authUser.userInfo])
-
-    const checkfavo= async ()=>{
-       
-      try{
-       const axios = AxiosClient();
-       const router =useRouter();
-       const recipeid= router.query.recipeid;
-       const userid = authUser.userInfo.id
-       const res = await axios.get('recipe/checkfavo',{params:{ userid: userid , recipeid: recipeid}}); 
-       if(res.data){
-       setFavoriteFlag(false)
-       }
-      
-      }catch(err){
-        return <Error statusCode={errorCode} />
-      }
-    }
-   
 
 
     if (errorCode) {
@@ -67,7 +63,6 @@ const MyPage :React.FC<Props>=({recipeDatas, errorCode})=>{
 export const getServerSideProps = async (ctx: any) => {
  
   try {
-     
     const id = ctx.params.recipeid;
     const axios = AxiosClient();
     const res = await axios.get(`recipe/${id}`);

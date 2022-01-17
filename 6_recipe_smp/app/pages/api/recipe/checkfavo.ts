@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NextApiRequestCookies, NextApiRequestQuery } from 'next/dist/server/api-utils';
 import { sqlExecuter } from '../../../modules/database';
 
 export default async (req:NextApiRequest,res:NextApiResponse)=>{

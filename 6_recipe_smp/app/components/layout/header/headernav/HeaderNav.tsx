@@ -5,20 +5,19 @@ import LoginModal from '../../../modal/LoginModal'
 import MenuModal from '../../../modal/MenuModal'
 import  { useState }  from 'react';
 import {useContext} from "react";
-import {AuthUserContext, AuthDispatchContext} from "../../../userprovider/AuthUser";
+import {AuthUserContext} from "../../../userprovider/AuthUser";
 
 
 
 const HeaderNav = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  // const [LoginedUserData, setLoginedUserData] = useState<LoginedUserData |null>(null)
   const [showMenuModal, setShowMenuModal] = useState(false);
   const authUser = useContext(AuthUserContext)
-  const setUserInfo= useContext(AuthDispatchContext);
   const [err, setErr]=useState("")
 
-  const showLoginModalClick= ()=>{
+ const showLoginModalClick= ()=>{
         showLoginModal ? (setShowLoginModal(false)):(setShowLoginModal(true));
+        //errメッセージのリセット
         setErr("");
   }
 
@@ -42,7 +41,7 @@ const HeaderNav = () => {
     
     <div className={style.wrapper}>
             
-      <LoginModal setUserInfo={setUserInfo} showLoginModal={showLoginModal} showLoginModalClick={showLoginModalClick}  setErr={setErr} err={err}/>
+      <LoginModal  showLoginModal={showLoginModal} showLoginModalClick={showLoginModalClick}  setErr={setErr} err={err}/>
 
       <ul>
           <li>
