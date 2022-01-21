@@ -11,7 +11,7 @@ import { useState } from 'react';
 import favoInspection from '../../modules/favoInspection';
 
 export interface RecipeDataProps extends RecipeApiResponse {
-  isFlag: undefined | boolean;
+  isFavorite: undefined | boolean;
 }
 interface Props {
   initRecipeDatas: RecipeDataProps;
@@ -22,7 +22,7 @@ interface Props {
 const MyPage: React.FC<Props> = ({ initRecipeDatas, errorCode }) => {
   const authUser = useContext(AuthUserContext);
   const router = useRouter();
-  initRecipeDatas.isFlag=undefined;
+  initRecipeDatas.isFavorite=undefined;
   
   const [recipeDatas, setRecipeDatas]= useState<RecipeDataProps>(initRecipeDatas)
 
