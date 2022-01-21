@@ -9,29 +9,19 @@ import { AuthUserContext } from '../../components/userprovider/AuthUser';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import favoInspection from '../../modules/favoInspection';
-import {
-  RecipeData,
-  IngredientData,
-  ProcessData,
-} from '../../＠types/basicdata';
 
 interface Props {
-  recipeDatas: RecipeApiResponse;
+  initRecipeDatas: RecipeApiResponse;
   errorCode: number;
 }
 
-type dataProps = {
-  recipeData: RecipeData;
-  ingredientData: IngredientData;
-  processData: ProcessData;
-  isFlag: boolean | undefined;
-};
-const MyPage: React.FC<Props> = ({ recipeDatas, errorCode }) => {
+
+const MyPage: React.FC<Props> = ({ initRecipeDatas, errorCode }) => {
   const authUser = useContext(AuthUserContext);
   const router = useRouter();
-  recipeDatas['isFlag'] = undefined;
-
-  console.log(recipeDatas);
+  initRecipeDatas.isFlag=undefined;
+  
+  const [recipeDatas, setRecipeDatas]= useState<RecipeApiResponse>(initRecipeDatas)
 
   useEffect(() => {
     if (authUser.userInfo) {
@@ -67,7 +57,7 @@ export const getServerSideProps = async (ctx: any) => {
     if (res.data.recipeDatas.length == 0) {
       return { props: { errorCode: 500 } };
     }
-    return { props: { recipeDatas: res.data.recipeDatas } };
+    return { props: { initRecipeDatas: res.data.recipeDatas } };
 
     //このpropsは上のPageコンポーネントに渡される
   } catch (err) {

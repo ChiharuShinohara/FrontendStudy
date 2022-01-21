@@ -4,7 +4,7 @@ import Ingredients from './ingredients/Ingredients';
 import Process from './process/Process';
 import React from 'react';
 import { RecipeApiResponse } from '../../＠types/basicdata';
-import FavoButton from '../favorite/FavoButton';
+import FavoButton from '../favorite/Favobutton';
 
 // import Link from 'next/link';
 
