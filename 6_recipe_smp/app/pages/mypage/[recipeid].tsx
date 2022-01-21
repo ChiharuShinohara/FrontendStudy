@@ -10,8 +10,11 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import favoInspection from '../../modules/favoInspection';
 
+export interface RecipeDataProps extends RecipeApiResponse {
+  isFlag: undefined | boolean;
+}
 interface Props {
-  initRecipeDatas: RecipeApiResponse;
+  initRecipeDatas: RecipeDataProps;
   errorCode: number;
 }
 
@@ -21,7 +24,7 @@ const MyPage: React.FC<Props> = ({ initRecipeDatas, errorCode }) => {
   const router = useRouter();
   initRecipeDatas.isFlag=undefined;
   
-  const [recipeDatas, setRecipeDatas]= useState<RecipeApiResponse>(initRecipeDatas)
+  const [recipeDatas, setRecipeDatas]= useState<RecipeDataProps>(initRecipeDatas)
 
   useEffect(() => {
     if (authUser.userInfo) {

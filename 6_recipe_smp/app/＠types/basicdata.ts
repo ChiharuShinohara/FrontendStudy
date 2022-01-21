@@ -2,7 +2,6 @@ export interface RecipeApiResponse {
   recipeData: RecipeData;
   ingredientData: IngredientData;
   processData: ProcessData;
-  isFlag?: undefined | boolean;
 };
 
 export type RecipeData = {
