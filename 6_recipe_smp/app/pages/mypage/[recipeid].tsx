@@ -39,7 +39,6 @@ const MyPage: React.FC<Props> = ({ recipeDatas, errorCode }) => {
       const userid = authUser.userInfo.id;
       favoInspection(userid, recipeid)
         .then((datas) => {
-          setFavoriteFlag(datas);
         })
         .catch((err) => {
           console.log(err);
@@ -54,11 +53,7 @@ const MyPage: React.FC<Props> = ({ recipeDatas, errorCode }) => {
   return (
     <div>
       <Layout>
-        <Conteiner
-          recipeDatas={recipeDatas}
-          favoriteFlag={favoriteFlag}
-          setFavoriteFlag={setFavoriteFlag}
-        ></Conteiner>
+        <Conteiner recipeDatas={recipeDatas}></Conteiner>
       </Layout>
     </div>
   );

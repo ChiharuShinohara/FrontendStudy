@@ -11,22 +11,15 @@ type favoProps = {
 
 interface Props {
   recipeData: RecipeData;
-  favoriteFlag: favoProps[];
-  setFavoriteFlag: React.Dispatch<React.SetStateAction<favoProps[]>>;
 }
-const Favobutton: React.FC<Props> = ({
-  recipeData,
-  favoriteFlag,
-  setFavoriteFlag,
-}) => {
+const FavoButton: React.FC<Props> = ({ recipeData }) => {
   const favoriteCount = Number(recipeData.favorite_count);
   const recipeid = recipeData.id;
   const [count, setCount] = useState(favoriteCount);
   const authUser = useContext(AuthUserContext);
 
   const handleClickCount = (e) => {
-    setFavoriteFlag(!favoriteFlag);
-    if (favoriteFlag) {
+    if (recipeData) {
       setCount(count - 1);
     } else {
       setCount(count + 1);
@@ -34,7 +27,7 @@ const Favobutton: React.FC<Props> = ({
   };
 
   const heartColor = () => {
-    if (favoriteFlag) {
+    if (recipeData) {
       return (
         <div>
           <span className={'commonIcon iconHeart'}>{count}</span>
@@ -75,4 +68,4 @@ const Favobutton: React.FC<Props> = ({
   );
 };
 
-export default Favobutton;
+export default FavoButton;

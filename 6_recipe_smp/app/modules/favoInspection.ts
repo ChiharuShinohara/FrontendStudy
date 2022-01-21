@@ -1,17 +1,14 @@
+import { AxiosResponse } from 'axios';
 import { AxiosClient } from '../modules/request';
 
 type CheckfavoAxios =
   | {
       user_id: number;
+      recipe_id: number;
     }[]
   | [];
 
-type favoProps = {
-  recipeid: number;
-  isFlag: boolean;
-}[];
-
-const favoInspection = async (userid, recipeid) => {
+async function favoInspection(userid, recipeid): Promise<CheckfavoAxios> {
   const axios = AxiosClient();
   const res = await axios.get<CheckfavoAxios>('recipe/checkfavo', {
     params: { userid: userid, recipeid: recipeid },
@@ -22,6 +19,6 @@ const favoInspection = async (userid, recipeid) => {
     console.log('nocheckfavodata');
     return null;
   }
-};
+}
 
 export default favoInspection;

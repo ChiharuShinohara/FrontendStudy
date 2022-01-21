@@ -4,21 +4,15 @@ import Ingredients from './ingredients/Ingredients';
 import Process from './process/Process';
 import React from 'react';
 import { RecipeApiResponse } from '../../＠types/basicdata';
-import Favobutton from '../favorite/Favobutton';
+import FavoButton from '../favorite/FavoButton';
 
 // import Link from 'next/link';
 
 interface Props {
   recipeDatas: RecipeApiResponse;
-  favoriteFlag: boolean;
-  setFavoriteFlag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Conteiner: React.FC<Props> = ({
-  recipeDatas,
-  favoriteFlag,
-  setFavoriteFlag,
-}) => {
+const Conteiner: React.FC<Props> = ({ recipeDatas }) => {
   const [recipeData, ingredientData, processData] = [
     recipeDatas.recipeData,
     recipeDatas.ingredientData,
@@ -43,11 +37,7 @@ const Conteiner: React.FC<Props> = ({
       <RecipeDetail recipeData={recipeData} />
       <Ingredients ingredientData={ingredientData} />
       <Process processData={processData} />
-      <Favobutton
-        recipeData={recipeData}
-        favoriteFlag={favoriteFlag}
-        setFavoriteFlag={setFavoriteFlag}
-      ></Favobutton>
+      <FavoButton recipeData={recipeData}></FavoButton>
     </div>
   );
 };
