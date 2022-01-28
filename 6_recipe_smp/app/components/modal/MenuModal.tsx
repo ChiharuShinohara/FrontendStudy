@@ -17,7 +17,7 @@ const MenuModal: React.FC<Props> = ({
   showLoginModalClick,
 }) => {
   const UserInfo = () => {
-    if (authUser) {
+    if (authUser.userInfo) {
       return (
         <div className={style.user}>
           <img src={authUser.userInfo.icon} width={40} height={40}></img>
