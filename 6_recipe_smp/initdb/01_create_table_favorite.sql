@@ -18,4 +18,3 @@ values
 (7,4);
 
 
-select * from favorites where user_id= 1 and recipe_id=4;

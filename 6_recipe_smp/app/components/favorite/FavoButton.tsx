@@ -2,6 +2,8 @@ import style from './favobutton.module.scss';
 import React, { useState, useContext } from 'react';
 import { AuthUserContext } from '../userprovider/AuthUser';
 import { RecipeDataProps } from '../../pages/mypage/[recipeid]';
+import favopost from '../../modules/favopost';
+import favodelete from '../../modules/favodelete';
 
 interface Props {
   recipeDatas: RecipeDataProps;
@@ -15,10 +17,14 @@ const FavoButton: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
   const authUser = useContext(AuthUserContext);
 
   const handleClickCount = (e) => {
+    const userid = authUser.userInfo.id;
     if (recipeDatas.isFavorite) {
       setCount(count - 1);
+      favodelete(userid, recipeid);
       setRecipeDatas({ ...recipeDatas, isFavorite: false });
     } else {
+      const userid = authUser.userInfo.id;
+      favopost(userid, recipeid);
       setCount(count + 1);
       setRecipeDatas({ ...recipeDatas, isFavorite: true });
     }

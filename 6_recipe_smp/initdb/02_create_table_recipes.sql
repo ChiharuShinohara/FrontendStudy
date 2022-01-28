@@ -6,7 +6,8 @@ explain varchar,
 insert_date date,
 img varchar,
 category serial,
-user_id serial
+user_id serial,
+favorite_count serial
 );
 
 insert into recipes
@@ -18,7 +19,8 @@ values(
 '2020-04-04',
 'https://asset.oceans-nadia.com/upload/save_image/c3/c3f196582332cc0a96468577615d44f5.jpeg?impolicy=insidewm&w=410&h=614',
 6,
-1
+1,
+0
 ),
 (2,
 'もちもちどら焼き',
@@ -27,7 +29,8 @@ values(
 '2020-06-06',
 'https://asset.oceans-nadia.com/upload/save_image/45/45a79a7f73fa700cb7c2f2170273a5fa.jpg?impolicy=insidewm&w=410&h=614',
 6,
-2
+2,
+0
 ),
 (3,
 '丸ごとみかん大福',
@@ -36,7 +39,8 @@ values(
 '2020-08-08',
 'https://asset.oceans-nadia.com/upload/save_image/00/0030b6dc2d751893d117c476bac47eb1.jpeg?impolicy=insidewm&w=410&h=614',
 6,
-3
+3,
+0
 ),
 (4,
 '元気が出るカツサンド',
@@ -45,7 +49,8 @@ values(
 '2020-10-10',
 'https://asset.oceans-nadia.com/upload/save_image/56/560e8d6ebffb.jpg?impolicy=insidewm&w=410&h=614',
 1,
-2
+2,
+6
 ),
 (5,
 'ザクザク甘辛チキン',
@@ -54,7 +59,8 @@ values(
 '2020-12-12',
 'https://asset.oceans-nadia.com/upload/save_image/6e/6e8fb5f34debab7a105a957df932fdf6.jpeg?impolicy=insidewm&w=410&h=614',
 3,
-1
+1,
+0
 ),
 (6,
 '無限はちみつナッツ',
@@ -63,6 +69,7 @@ values(
 '2021-02-02',
 'https://asset.oceans-nadia.com/upload/save_image/c8/c89ef21664dc8a7fb4e6d877a5b642b1.jpeg?impolicy=insidewm&w=410&h=614',
 6,
+2,
 2
 ),
 (7,
@@ -72,7 +79,8 @@ values(
 '2021-04-04',
 'https://asset.oceans-nadia.com/upload/save_image/ee/ee0d603187901f55a0baf68fa9601c9f.jpg?impolicy=insidewm&w=410&h=614',
 5,
-2
+2,
+0
 ),
 (8,
 '給食のカレー',
@@ -81,7 +89,8 @@ values(
 '2021-06-06',
 'https://asset.oceans-nadia.com/upload/save_image/28/28c060fc8292.JPG?impolicy=insidewm&w=410&h=614',
 1,
-3
+3,
+0
 ),
 (9,
 '伝説のフレンチトースト',
@@ -90,7 +99,8 @@ values(
 '2010-01-06',
 'https://asset.oceans-nadia.com/upload/save_image/86/86987a72e913e29969559b336d3bb496.jpg?impolicy=insidewm&w=410&h=614',
 1,
-1
+1,
+0
 ),
 (10,
 '背徳のマカロニチーズ',
@@ -99,7 +109,8 @@ values(
 '2011-11-03',
 'https://asset.oceans-nadia.com/upload/save_image/a4/a48fcb805413f4099caf29d7acad5269.jpg?impolicy=insidewm&w=410&h=614',
 1,
-2
+2,
+4
 ),
 (11,
 '台湾風豆乳スープ',
@@ -108,7 +119,8 @@ values(
 '2012-12-03',
 'https://asset.oceans-nadia.com/upload/save_image/75/756331907d1c3ba61d0202e501062457.jpg?impolicy=insidewm&w=410&h=614',
 4,
-2
+2,
+0
 ),
 (12,
 'ほっくりかぼちゃもち',
@@ -117,7 +129,8 @@ values(
 '2021-02-04',
 'https://asset.oceans-nadia.com/upload/save_image/37/379faa5eb48bb3d54194f5aafc8d1562.jpg?impolicy=insidewm&w=410&h=614',
 3,
-3
+3,
+0
 ),
 (13,
 'さつまいもとくりの秋の炊き込みご飯',
@@ -126,7 +139,8 @@ values(
 '2021-09-04',
 'https://asset.oceans-nadia.com/upload/save_image/26/263cb4572de0dc5f4f2a7f68778d7831.jpg?impolicy=insidewm&w=410&h=614',
 1,
-1
+1,
+0
 ),
 (14,
 '秘伝の恵方巻き',
@@ -135,7 +149,7 @@ values(
 '2011-02-01',
 'https://asset.oceans-nadia.com/upload/save_image/92/923030a01bd13058e2b92b633eb50410.jpg?impolicy=insidewm&w=410&h=614',
 1,
-2
+2,
+0
 );
-
 
