@@ -1,4 +1,4 @@
-import style from './conteiner.module.scss';
+import style from './container.module.scss';
 import RecipeDetail from './recipedetail/RecipeDetail';
 import Ingredients from './ingredients/Ingredients';
 import Process from './process/Process';
@@ -14,12 +14,8 @@ interface Props {
   setRecipeDatas: React.Dispatch<React.SetStateAction<RecipeDataProps>>;
 }
 
-const Conteiner: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
-  const [recipeData, ingredientData, processData] = [
-    recipeDatas.recipeData,
-    recipeDatas.ingredientData,
-    recipeDatas.processData,
-  ];
+const Container: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
+  const {recipeData, ingredientData, processData} = recipeDatas
   const authUser = useContext(AuthUserContext);
 
   return (
@@ -47,4 +43,4 @@ const Conteiner: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
   );
 };
 
-export default Conteiner;
+export default Container;

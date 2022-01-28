@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Error from 'next/error';
 import Layout from '../../components/layout/Layout';
-import Conteiner from '../../components/main/conteiner';
+import Container from '../../components/main/container';
 import { AxiosClient } from '../../modules/request';
 import { RecipeApiResponse } from '../../＠types/basicdata';
 import { useContext } from 'react';
@@ -54,10 +54,10 @@ const MyPage: React.FC<Props> = ({ initRecipeDatas, errorCode }) => {
   return (
     <div>
       <Layout>
-        <Conteiner
+        <Container
           recipeDatas={recipeDatas}
           setRecipeDatas={setRecipeDatas}
-        ></Conteiner>
+        ></Container>
       </Layout>
     </div>
   );
