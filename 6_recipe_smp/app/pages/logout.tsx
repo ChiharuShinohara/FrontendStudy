@@ -15,7 +15,7 @@ const Logout = (ctx) => {
   const router = useRouter();
   useEffect(() => {
     router.push('/');
-  });
+  },[authUser.userInfo]);
 
   return null;
 };

@@ -4,6 +4,7 @@ import { AuthUserContext } from '../userprovider/AuthUser';
 import { RecipeDataProps } from '../../pages/mypage/[recipeid]';
 import favopost from '../../modules/favopost';
 import favodelete from '../../modules/favodelete';
+import LoginModal from '../modal/LoginModal'
 
 interface Props {
   recipeDatas: RecipeDataProps;
@@ -15,6 +16,14 @@ const FavoButton: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
   const recipeid = recipeData.id;
   const [count, setCount] = useState(favoriteCount);
   const authUser = useContext(AuthUserContext);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+   const [err, setErr] = useState('');
+
+   const showLoginModalClick = () => {
+    showLoginModal ? setShowLoginModal(false) : setShowLoginModal(true);
+    //errメッセージのリセット
+    setErr('');
+  };
 
   const handleClickCount = (e) => {
     const userid = authUser.userInfo.id;
@@ -48,6 +57,12 @@ const FavoButton: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
 
   return (
     <div className={style.button}>
+      <LoginModal
+        showLoginModal={showLoginModal}
+        showLoginModalClick={showLoginModalClick}
+        setErr={setErr}
+        err={err}
+      />
       {/* userがログインしていなかったらログインモーダル表示 */}
       {authUser.userInfo ? (
         <a
@@ -61,7 +76,7 @@ const FavoButton: React.FC<Props> = ({ recipeDatas, setRecipeDatas }) => {
       ) : (
         <a
           onClick={(e) => {
-            handleClickCount(e);
+            showLoginModalClick();
           }}
         >
           <span>お気に入りに入れる</span>
