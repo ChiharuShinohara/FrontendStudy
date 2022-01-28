@@ -1,7 +1,6 @@
 import style from '../modal/loginmodal.module.scss';
 import { AxiosClient } from '../../modules/request';
 import { useState, useContext } from 'react';
-import { AuthState } from '../userprovider/AuthUser';
 import { setCookie } from 'nookies';
 import { AuthDispatchContext } from '../userprovider/AuthUser';
 
